@@ -1,0 +1,7 @@
+<?php
+include_once "../model/UserShop.php";
+if(session_status() === PHP_SESSION_NONE) session_start();
+include_once "functions/funcionsValidarUsuari.php";
+
+removeUserByEmail($_GET['email']);
+header('Location: ../view/users.php');

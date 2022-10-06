@@ -1,0 +1,42 @@
+<?php
+
+function checkIfMailExits($email){
+    if (count($_SESSION['usuaris'])>0){
+        foreach ($_SESSION['usuaris'] as $user){
+            if ($user->getEmail() == $email){
+                return true;
+            }
+        }
+    }
+    return null;
+}
+function checkCred($mail,$pass){
+    foreach ($_SESSION['usuaris'] as $user){
+        if($user->getEmail() == $mail){
+            if ($user->getPass() == $pass){
+                if ($user->getBanned() == false){
+                    return $user;
+                }
+            }
+        }
+    }
+    return null;
+}
+function getUserByEmail($email){
+    foreach ($_SESSION['usuaris'] as $user){
+        if ($user->getEmail()==$email){
+            return $user;
+        }
+    }
+    return null;
+}
+
+function removeUserByEmail($email){
+    foreach ($_SESSION['usuaris'] as $key => $user){
+        if ($user->getEmail()==$email){
+            unset($_SESSION['usuaris'][$key]);
+            return true;
+        }
+    }
+    return false;
+}

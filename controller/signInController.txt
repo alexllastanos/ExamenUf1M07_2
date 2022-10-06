@@ -1,0 +1,21 @@
+<?php
+include_once "../model/UserShop.php";
+if(session_status() === PHP_SESSION_NONE) session_start();
+include_once "functions/funcionsValidarUsuari.php";
+
+
+if(!(isset($_POST['formSignIn']))){
+    header("Location: ../view/signIn.php");
+    die();
+}
+
+$res = checkCred($_POST['email'],$_POST['pass']);
+if ($res!=null){
+    $_SESSION['userLogged'] = $res;
+    header('Location: ../view/home.php');
+    exit();
+}
+
+$_SESSION['info'] = "Invalid Credentials";
+header('Location: ../view/signIn.php');
+exit();

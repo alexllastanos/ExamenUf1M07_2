@@ -1,0 +1,8 @@
+<?php
+include_once "../model/UserShop.php";
+if(session_status() === PHP_SESSION_NONE) session_start();
+include_once "functions/funcionsValidarUsuari.php";
+
+unset($_SESSION['userLogged']);
+header('Location: ../view/signIn.php');
+exit();

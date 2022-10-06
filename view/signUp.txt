@@ -1,0 +1,85 @@
+<?php
+include_once "../model/UserShop.php";
+include_once "../model/LineCart.php";
+
+if(session_status() === PHP_SESSION_NONE) session_start();
+?>
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/form.css">
+    <title>Sign Up</title>
+</head>
+<body>
+<?php
+include_once "nav/nav.php";
+?>
+<?php
+
+?>
+<div class="content">
+    <form action="/controller/signUpController.php" method="post">
+        <h3>SignUp Form</h3>
+        <table>
+            <tr>
+                <th>
+                    <label for="idInputMail">Email</label>
+                </th>
+                <th>
+                    <input type="email" name="email" id="idInputMail" style="<?php echo isset($_SESSION['errors']['emailEmpty']) ? 'border: 2px solid red' : null ?>" value="">
+                </th>
+
+            </tr>
+            <tr>
+                <th>
+                    <label for="idInputPass">Password</label>
+                </th>
+                <th>
+                    <input type="password" name="pass" id="idInputPass" style="<?php echo isset($_SESSION['errors']['passEmpty']) ? 'border: 2px solid red' : null ?>" value="">
+                </th>
+            </tr>
+            <tr>
+                <th>
+                    <label for="idInputFullName">Full Name</label>
+                </th>
+                <th>
+                    <input type="text" name="fullName" id="idInputFullName" style="<?php echo isset($_SESSION['errors']['fullNameEmpty']) ? 'border: 2px solid red' : null ?>" value="">
+                </th>
+            </tr>
+            <tr>
+                <th>
+                    <label for="idInputBirthDate">BirthDate</label>
+                </th>
+                <th>
+                    <input type="date" name="birthDate" id="idInputBirthDate" style="<?php echo isset($_SESSION['errors']['birthDateEmpty']) ? 'border: 2px solid red' : null ?>" value="">
+
+                </th>
+            </tr>
+        </table>
+        <div class="smallText">
+            <small style="color: red; font-weight: bold">
+                <br>
+                <?php
+                echo isset($_SESSION['errors']['email']) ? $_SESSION['errors']['email'] : null ?>
+
+                <?php
+                echo isset($_SESSION['errors']['blank']) ? $_SESSION['errors']['blank'] : null ?>
+
+            </small>
+        </div>
+        <div class="buttons">
+            <input type="submit" name="formSignUp" value="Register">
+            <input type="reset" value="Reset">
+        </div>
+
+        <?php unset($_SESSION['errors']); ?>
+    </form>
+
+</div>
+</body>
+</html>
+

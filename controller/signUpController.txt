@@ -1,0 +1,37 @@
+<?php
+include_once "../model/UserShop.php";
+if(session_status() === PHP_SESSION_NONE) session_start();
+include_once "functions/funcionsValidarUsuari.php";
+if(!(isset($_POST['formSignUp']))){
+    header("Location: ../view/signUp.php");
+    die();
+}array();
+if (empty($_POST['email'])){
+    $_SESSION['error
+$_SESSION['errors']=s']['emailEmpty'] = true;
+}
+if (empty($_POST['pass'])){
+    $_SESSION['errors']['passEmpty'] = true;
+}
+if (empty($_POST['fullName'])){
+    $_SESSION['errors']['fullNameEmpty'] = true;
+}
+if (empty($_POST['birthDate'])){
+    $_SESSION['errors']['birthDateEmpty'] = true;
+}
+if (empty($_POST['email'] || $_POST['pass'] || $_POST['fullName'] || $_POST['birthDate'])){
+    $_SESSION['errors']['blank'] = "Some input field are empty";
+}
+if (checkIfMailExits($_POST['email'])){
+    $_SESSION['errors']['email']="Email already in use";
+}
+if (count($_SESSION['errors'])>0){
+    $_SESSION['data'] = $_POST;
+    header('Location: ../view/signUp.php');
+    die();
+}
+$_SESSION['usuaris'][] = new UserShop($_POST['email'],$_POST['pass'],$_POST['fullName'],$_POST['birthDate']);
+$_SESSION['info'] = "User succefuly created";
+header('Location: ../view/signIn.php');
+
+?>
